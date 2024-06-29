@@ -1,8 +1,15 @@
-from amaranth.sim import Simulator
-import m_pc as pc
+from amaranth.sim import Simulator, Delay
+import m_imem as m1
 
-dut = pc.ProgramCounter()
+dut = m1.imem()
+
+async def testbench(ctx):
+    for i in range (10):
+        ctx.set(dut.addr, i)
+        data = ctx.get(dut.inst)
+        print(f"addr: {i}, data: 0x{data:x}")
+
 sim = Simulator(dut)
-sim.add_clock(1e-6)
-with sim.write_vcd("pc.vcd"):
-    sim.run_until(1e-6 * 15)
+sim.add_testbench(testbench)
+with sim.write_vcd("testbench.vcd"):
+    sim.run()
