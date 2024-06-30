@@ -1,7 +1,6 @@
 from amaranth import *
 from amaranth.lib import wiring
 from amaranth.lib.wiring import In, Out
-from amaranth.cli import main
 
 class ALU(wiring.Component):
     def __init__(self):
