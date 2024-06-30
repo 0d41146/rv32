@@ -32,7 +32,6 @@ class imem(wiring.Component):
     
     def elaborate(self, platform):
         m = Module()
-        message = b"Hello world\n"
         m.submodules.memory = memory = \
             Memory(shape=unsigned(32), depth=1024, init=self.config)
         
